@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="weather.css" />
+    <h1>5-Day Weather Forecasts</h1>
+
+    <div id="weather-list"></div>
+    <h3>Day Details</h3>
+
+    <div id="weather2">
+      <h2 id="weather-name"></h2>
+      <div id="weather-temp"></div>
+
+      <div id="weather-day"></div>
+      <div id="weather-type" class="details"></div>
+      <div id="weather-windDirection" class="details"></div>
+      <div id="weather-windSpeed" class="details"></div>
+    </div>
+
+    <script>
+      const weatherData = {
+        tempUnit: "C",
+        windSpeedUnit: "m/s",
+        days: [
+          {
+            day: "Mon",
+            temp: 22,
+            windDirection: "north-east",
+            windSpeed: 10,
+            type: "sunny",
+          },
+          {
+            day: "Tue",
+            temp: 14,
+            windDirection: "north-west",
+            windSpeed: 14,
+            type: "rainy",
+          },
+          {
+            day: "Wed",
+            temp: 20,
+            windDirection: "south-east",
+            windSpeed: 15,
+            type: "cloudy",
+          },
+          {
+            day: "Thu",
+            temp: 19,
+            windDirection: "north-west",
+            windSpeed: 14,
+            type: "rainy",
+          },
+          {
+            day: "Fri",
+            temp: 18,
+            windDirection: "south-east",
+            windSpeed: 10,
+            type: "cloudy",
+          },
+        ],
+      };
+
+      $("#weather-list").on("click", "div", function () {
+        var day = weatherData.days[$(this).data("index")];
+        $("#weather-day").html(day.day);
+        $("#weather-windDirection").text(
+          "Wind Direction : " + day.windDirection
+        );
+        $("#weather-windSpeed").text(
+          "Wind Speed : " + day.windSpeed + weatherData.windSpeedUnit
+        );
+        $("#weather-type").html(day.type);
+      });
+
+      var f1 = function () {
+        for (var i = 0; i <= weatherData.days.length; i++) {
+          $("#weather-list").append(
+            '<div class="day-weather" data-index="' +
+              i +
+              '">' +
+              "<h3>" +
+              weatherData.days[i].day +
+              "</h3>" +
+              "<br>" +
+              "<h5>" +
+              "Temperature: " +
+              "</h5>" +
+              weatherData.days[i].temp +
+              " " +
+              weatherData.tempUnit +
+              "</div>"
+          );
+        }
+      };
+      f1();
+    </script>
+  </body>
+</html>
